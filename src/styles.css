@@ -62,15 +62,23 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+  --radius: 1.25rem;
+  --background: oklch(0.97 0.03 320);
+  --foreground: oklch(0.3 0.05 320);
+  --sky-top: oklch(0.92 0.06 230);
+  --sky-bottom: oklch(0.95 0.05 320);
+  --grass: oklch(0.85 0.12 145);
+  --grass-dark: oklch(0.75 0.14 145);
+  --pink: oklch(0.82 0.14 0);
+  --pink-soft: oklch(0.92 0.08 350);
+  --mint: oklch(0.88 0.1 175);
+  --sun: oklch(0.92 0.13 90);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
+  --primary: oklch(0.72 0.18 350);
+  --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.968 0.007 247.896);
   --secondary-foreground: oklch(0.208 0.042 265.755);
   --muted: oklch(0.968 0.007 247.896);
@@ -142,3 +150,43 @@
     color: var(--color-foreground);
   }
 }
+
+@theme inline {
+  --color-sky-top: var(--sky-top);
+  --color-sky-bottom: var(--sky-bottom);
+  --color-grass: var(--grass);
+  --color-grass-dark: var(--grass-dark);
+  --color-pink: var(--pink);
+  --color-pink-soft: var(--pink-soft);
+  --color-mint: var(--mint);
+  --color-sun: var(--sun);
+}
+
+@layer utilities {
+  .bg-sky-scene {
+    background-image: linear-gradient(to bottom, var(--sky-top) 0%, var(--sky-bottom) 100%);
+  }
+  .bg-grass-scene {
+    background-image: linear-gradient(to bottom, var(--grass) 0%, var(--grass-dark) 100%);
+  }
+  .font-game {
+    font-family: 'Nunito', 'Comic Sans MS', system-ui, sans-serif;
+    font-weight: 800;
+  }
+}
+
+@keyframes tail-wag {
+  0%, 100% { transform: rotate(-10deg); }
+  50% { transform: rotate(20deg); }
+}
+@keyframes cat-walk {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+@keyframes mic-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--primary) 60%, transparent); }
+  50% { box-shadow: 0 0 0 18px color-mix(in oklab, var(--primary) 0%, transparent); }
+}
+.animate-tail-wag { animation: tail-wag 1.2s ease-in-out infinite; transform-origin: left center; }
+.animate-cat-walk { animation: cat-walk 0.4s ease-in-out infinite; }
+.animate-mic-pulse { animation: mic-pulse 1.4s ease-out infinite; }
