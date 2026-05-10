@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Mic, MicOff, RotateCcw } from "lucide-react";
-import { Cat } from "./Cat";
 import { SoundWave } from "./SoundWave";
 import { Particles, type Particle } from "./Particles";
+import catScene from "@/assets/cat-scene.mp4.asset.json";
 
 type GameState = "idle" | "listening" | "catMoving" | "success";
 
