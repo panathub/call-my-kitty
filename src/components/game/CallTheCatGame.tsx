@@ -168,57 +168,45 @@ export function CallTheCatGame() {
           ref={sceneRef}
           className="relative w-full max-w-3xl h-[55vh] min-h-[340px] rounded-3xl overflow-hidden shadow-xl bg-sky-scene border-4 border-white/60"
         >
-          {/* Sun — low, behind the cat for backlight */}
-          <div
-            className="absolute left-1/2 -translate-x-1/2 w-56 h-56 rounded-full"
-            style={{
-              bottom: "28%",
-              background: "radial-gradient(circle, var(--sun) 0%, transparent 70%)",
-              filter: "blur(2px)",
-            }}
-          />
-          <div
-            className="absolute left-1/2 -translate-x-1/2 w-20 h-20 rounded-full"
-            style={{ bottom: "36%", background: "var(--sun)", boxShadow: "0 0 60px var(--sun)" }}
+          {/* Real cat footage — cinematic background */}
+          <motion.video
+            src={catScene.url}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+            animate={{ scale: 1 + (steps / TOTAL_STEPS) * 0.12 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           />
 
-          {/* Distant clouds */}
-          <motion.div
-            className="absolute top-8 left-8 text-3xl opacity-70"
-            animate={{ x: [0, 18, 0] }}
-            transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-          >
-            ☁️
-          </motion.div>
-          <motion.div
-            className="absolute top-12 right-10 text-2xl opacity-60"
-            animate={{ x: [0, -14, 0] }}
-            transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
-          >
-            ☁️
-          </motion.div>
+          {/* Cinematic vignette */}
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_55%,rgba(0,0,0,0.35)_100%)]" />
 
-          {/* Grass / ground */}
-          <div className="absolute inset-x-0 bottom-0 h-1/3 bg-grass-scene">
-            <div className="absolute inset-x-0 top-0 h-2 bg-white/30" />
-          </div>
-
-          {/* The big cat — centered, sitting behind the scene */}
+          {/* Warm color grade overlay that intensifies on success */}
           <motion.div
-            className="absolute left-1/2 bottom-0"
-            style={{ x: "-50%" }}
-            animate={{ scale: 1 + (steps / TOTAL_STEPS) * 0.18 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-          >
-            <Cat
-              walking={gameState === "catMoving"}
-              celebrating={gameState === "success"}
-            />
-          </motion.div>
+            className="pointer-events-none absolute inset-0"
+            style={{ background: "linear-gradient(to top, color-mix(in oklab, var(--pink) 30%, transparent), transparent 60%)" }}
+            animate={{ opacity: gameState === "success" ? 0.9 : 0.35 }}
+            transition={{ duration: 0.6 }}
+          />
 
           {/* Particles */}
           <Particles items={particles} />
 
+          {/* Success overlay */}
+          {gameState === "success" && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="absolute inset-x-0 top-6 mx-auto w-fit px-5 py-2 rounded-full bg-white/90 shadow-lg"
+              style={{ color: "var(--pink)" }}
+            >
+              The cat came to you! 🎉
+            </motion.div>
+          )}
+        </div>
+      </div>
           {/* Success overlay */}
           {gameState === "success" && (
             <motion.div
