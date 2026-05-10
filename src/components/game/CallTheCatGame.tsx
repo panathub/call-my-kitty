@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Mic, MicOff, RotateCcw } from "lucide-react";
 import { Cat } from "./Cat";
-import { Player } from "./Player";
 import { SoundWave } from "./SoundWave";
 import { Particles, type Particle } from "./Particles";
 
