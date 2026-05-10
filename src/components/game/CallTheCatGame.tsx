@@ -207,19 +207,6 @@ export function CallTheCatGame() {
           )}
         </div>
       </div>
-          {/* Success overlay */}
-          {gameState === "success" && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="absolute inset-x-0 top-6 mx-auto w-fit px-5 py-2 rounded-full bg-white/90 shadow-lg"
-              style={{ color: "var(--pink)" }}
-            >
-              The cat came to you! 🎉
-            </motion.div>
-          )}
-        </div>
-      </div>
 
       {/* Distance bar */}
       <div className="px-4 pt-4 max-w-3xl mx-auto w-full">
