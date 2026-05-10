@@ -168,46 +168,53 @@ export function CallTheCatGame() {
           ref={sceneRef}
           className="relative w-full max-w-3xl h-[55vh] min-h-[340px] rounded-3xl overflow-hidden shadow-xl bg-sky-scene border-4 border-white/60"
         >
-          {/* Sun */}
+          {/* Sun — low, behind the cat for backlight */}
           <div
-            className="absolute top-6 right-8 w-16 h-16 rounded-full"
-            style={{ background: "var(--sun)", boxShadow: "0 0 40px var(--sun)" }}
+            className="absolute left-1/2 -translate-x-1/2 w-56 h-56 rounded-full"
+            style={{
+              bottom: "28%",
+              background: "radial-gradient(circle, var(--sun) 0%, transparent 70%)",
+              filter: "blur(2px)",
+            }}
           />
-          {/* Clouds */}
+          <div
+            className="absolute left-1/2 -translate-x-1/2 w-20 h-20 rounded-full"
+            style={{ bottom: "36%", background: "var(--sun)", boxShadow: "0 0 60px var(--sun)" }}
+          />
+
+          {/* Distant clouds */}
           <motion.div
-            className="absolute top-10 left-10 text-4xl opacity-80"
-            animate={{ x: [0, 20, 0] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-8 left-8 text-3xl opacity-70"
+            animate={{ x: [0, 18, 0] }}
+            transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
           >
             ☁️
           </motion.div>
           <motion.div
-            className="absolute top-16 left-1/2 text-3xl opacity-70"
-            animate={{ x: [0, -15, 0] }}
-            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-12 right-10 text-2xl opacity-60"
+            animate={{ x: [0, -14, 0] }}
+            transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
           >
             ☁️
           </motion.div>
 
-          {/* Grass */}
+          {/* Grass / ground */}
           <div className="absolute inset-x-0 bottom-0 h-1/3 bg-grass-scene">
             <div className="absolute inset-x-0 top-0 h-2 bg-white/30" />
           </div>
 
-          {/* Cat */}
+          {/* The big cat — centered, sitting behind the scene */}
           <motion.div
-            className="absolute"
-            style={{ bottom: "22%" }}
-            animate={{ left: `${catPercent}%` }}
-            transition={{ duration: 0.7, ease: "easeInOut" }}
+            className="absolute left-1/2 bottom-0"
+            style={{ x: "-50%" }}
+            animate={{ scale: 1 + (steps / TOTAL_STEPS) * 0.18 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
           >
-            <Cat walking={gameState === "catMoving"} celebrating={gameState === "success"} />
+            <Cat
+              walking={gameState === "catMoving"}
+              celebrating={gameState === "success"}
+            />
           </motion.div>
-
-          {/* Player */}
-          <div className="absolute" style={{ bottom: "22%", right: "6%" }}>
-            <Player />
-          </div>
 
           {/* Particles */}
           <Particles items={particles} />
@@ -217,7 +224,7 @@ export function CallTheCatGame() {
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="absolute inset-x-0 top-6 mx-auto w-fit px-5 py-2 rounded-full bg-white/90 shadow-lg text-pink-600"
+              className="absolute inset-x-0 top-6 mx-auto w-fit px-5 py-2 rounded-full bg-white/90 shadow-lg"
               style={{ color: "var(--pink)" }}
             >
               The cat came to you! 🎉
